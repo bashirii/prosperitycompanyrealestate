@@ -328,24 +328,26 @@
         <div id="property-carousel" class="swiper">
           <div class="swiper-wrapper">
 
+            {{-- @foreach($properties as $property)
             <div class="carousel-item-b swiper-slide">
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
-                  <img src="assets/img/property-1.jpg" alt="" class="img-a img-fluid">
+                  <img src="{{ asset('storage/'.$property->img) }}" alt="" class="img-a img-fluid">
                 </div>
                 <div class="card-overlay">
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
                       <h2 class="card-title-a">
-                        <a href="property-single.html">property Mount
-                          <br /> Olive Road Two</a>
+                        <a href="{{ route('property_single', ['property_id' => $property->id]) }}">{{ $property->address }}
+                          <br /> {{ $property->location }}
+                        </a>
                       </h2>
                     </div>
                     <div class="card-body-a">
                       <div class="price-box d-flex">
-                        <span class="price-a">rent | $ 12.000</span>
+                        <span class="price-a">rent | $ {{ $property->price }}</span>
                       </div>
-                      <a href="#" class="link-a">Click here to view
+                      <a href="{{ route('property_single', ['property_id' => $property->id]) }}" class="link-a">Click here to view
                         <span class="bi bi-chevron-right"></span>
                       </a>
                     </div>
@@ -353,21 +355,20 @@
                       <ul class="card-info d-flex justify-content-around">
                         <li>
                           <h4 class="card-info-title">Area</h4>
-                          <span>340m
-                            <sup>2</sup>
+                          <span>sqm {{ $property->area }}
                           </span>
                         </li>
                         <li>
                           <h4 class="card-info-title">Beds</h4>
-                          <span>2</span>
+                          <span>{{ $property->beds }}</span>
                         </li>
                         <li>
                           <h4 class="card-info-title">Baths</h4>
-                          <span>4</span>
+                          <span>{{ $property->baths }}</span>
                         </li>
                         <li>
                           <h4 class="card-info-title">Garages</h4>
-                          <span>1</span>
+                          <span>{{ $property->garages    }}</span>
                         </li>
                       </ul>
                     </div>
@@ -375,6 +376,7 @@
                 </div>
               </div>
             </div><!-- End carousel item -->
+            @endforeach --}}
 
             <div class="carousel-item-b swiper-slide">
               <div class="card-box-a card-shadow">
@@ -551,12 +553,13 @@
         <div id="testimonial-carousel" class="swiper">
           <div class="swiper-wrapper">
 
-            <div class="carousel-item-a swiper-slide">
+            {{-- @foreach($clients as $testimonial) --}}
+            {{-- <div class="carousel-item-a swiper-slide">
               <div class="testimonials-box">
                 <div class="row">
                   <div class="col-sm-12 col-md-6">
                     <div class="testimonial-img">
-                      <img src="assets/img/testimonial-1.jpg" alt="" class="img-fluid">
+                      <img src="{{ asset('storage/'.$testimonial->img) }}" alt="" class="img-fluid">
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-6">
@@ -565,19 +568,18 @@
                     </div>
                     <div class="testimonials-content">
                       <p class="testimonial-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, cupiditate ea nam praesentium
-                        debitis hic ber quibusdam
-                        voluptatibus officia expedita corpori.
+                        {{ $testimonial->preview_desc }}
                       </p>
                     </div>
                     <div class="testimonial-author-box">
-                      <img src="assets/img/mini-testimonial-1.jpg" alt="" class="testimonial-avatar">
-                      <h5 class="testimonial-author">Albert & Erika</h5>
+                      <img src="{{ asset('storage/'.$testimonial->img) }}" alt="" class="testimonial-avatar">
+                      <h5 class="testimonial-author">{{ $testimonial->name }}</h5>
                     </div>
                   </div>
                 </div>
               </div>
-            </div><!-- End carousel item -->
+            </div><!-- End carousel item --> --}}
+            {{-- @endforeach --}}
 
             <div class="carousel-item-a swiper-slide">
               <div class="testimonials-box">
@@ -632,30 +634,31 @@
           </div>
         </div>
         <div class="row">
+
+          {{-- @foreach($team as $agent)
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="assets/img/agent-4.jpg" alt="" class="img-d img-fluid">
+                <img src="{{ asset('storage/'.$agent->img) }}" alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
                   <div class="card-title-d align-self-center">
                     <h3 class="title-d">
-                      <a href="{{route('agent_single')}}" class="link-two">Margaret Sotillo
-                        <br> Escala</a>
+                      <a href="{{route('agent_single')}}" class="link-two">{{ $agent->name }}</a>
                     </h3>
                   </div>
                 </div>
                 <div class="card-body-d">
                   <p class="content-d color-text-a">
-                    Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two.
+                    {{ $agent->preview_desc }}
                   </p>
                   <div class="info-agents color-a">
                     <p>
-                      <strong>Phone: </strong> +54 356 945234
+                      <strong>Phone: </strong> {{ $agent->phone }}
                     </p>
                     <p>
-                      <strong>Email: </strong> agents@example.com
+                      <strong>Email: </strong> {{ $agent->email }}
                     </p>
                   </div>
                 </div>
@@ -663,23 +666,18 @@
                   <div class="socials-footer d-flex justify-content-center">
                     <ul class="list-inline">
                       <li class="list-inline-item">
-                        <a href="#" class="link-one">
+                        <a href="{{ $agent->facebook }}" class="link-one">
                           <i class="bi bi-facebook" aria-hidden="true"></i>
                         </a>
                       </li>
                       <li class="list-inline-item">
-                        <a href="#" class="link-one">
+                        <a href="{{ $agent->twitter }}" class="link-one">
                           <i class="bi bi-twitter" aria-hidden="true"></i>
                         </a>
                       </li>
                       <li class="list-inline-item">
-                        <a href="#" class="link-one">
+                        <a href="{{ $agent->instagram }}" class="link-one">
                           <i class="bi bi-instagram" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-linkedin" aria-hidden="true"></i>
                         </a>
                       </li>
                     </ul>
@@ -688,6 +686,8 @@
               </div>
             </div>
           </div>
+          @endforeach --}}
+
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">

@@ -47,3 +47,34 @@ Route::get('/property_single', [RealEstateController::class, 'property_single'])
 
 // Route::get('/testimonial', [RealEstateController::class, 'testimonial'])
 //     ->name('testimonial');
+Route::get('login', [LoginController::class, 'show_login']);
+
+Route::group(['prefix' => 'admin'], function () {
+
+    Route::get('/', [LoginController::class, 'show_login'])->name('admin.login');
+    Route::get('login', [LoginController::class, 'show_login'])->name('login');
+    Route::post('authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
+
+    Route::group(['middleware' => 'auth'], function (){
+        Route::get('forgot_password', [LoginController::class, 'logout'])->name('forgot_password');
+        Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+        Route::post('reset_password', [HomeController::class, 'change_password'])->name('reset_password');
+        Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
+
+        Route::get('users', [UserController::class, 'user'])->name('admin.users');
+
+        Route::get('/booking', [AdminPanelController::class, 'booking'])->name('admin.booking');
+
+        Route::get('/carousel', [AdminPanelController::class, 'carousel'])->name('admin.carousel');
+
+        Route::get('/articles', [AdminPanelController::class, 'blog'])->name('admin.blog');
+
+        Route::get('/property', [AdminPanelController::class, 'property'])->name('admin.property');
+
+        Route::get('/team', [AdminPanelController::class, 'team'])->name('admin.team');
+
+        Route::get('/testimonial', [AdminPanelController::class, 'testimonial'])->name('admin.testimonial');
+
+    });
+});
