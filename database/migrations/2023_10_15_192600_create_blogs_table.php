@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('created_by');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->string('preview_desc');
             $table->boolean('is_active')->default(false);
             $table->timestamps();

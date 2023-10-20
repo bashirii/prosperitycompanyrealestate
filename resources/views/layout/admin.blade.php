@@ -8,7 +8,8 @@
     <meta content="SpringTech" name="author" />
     <meta content="Good Wanderers website" name="description">
     <!-- App favicon -->
-    {{--    <link rel="shortcut icon" href="{{asset('assets/images/spring_logo.png')}}">--}}
+    <link href="assets/img/Prosperity_Real_Estate_Logo_Final.png" rel="icon">
+    <link href="assets/img/Prosperity_Real_Estate_Logo_Final.png" rel="apple-touch-icon">
 
     <!-- App css -->
     <link href="{{asset('asset_admin/css/icons.min.css')}}" rel="stylesheet" type="text/css">
@@ -41,23 +42,24 @@
         <!-- LOGO -->
         <a href="{{route('admin.dashboard')}}" class="logo text-center logo-light">
                     <span class="logo-lg">
-                        {{-- {{config('app.name')}} --}}
-                        Good Wanderers
-{{--                        <img src="{{asset('assets/images/logo.jpeg')}}" alt="">--}}
+                        {{config('app.name')}}
+                       <img src="{{asset('assets/img/Prosperity_Real_Estate_Logo_Final.png')}}" alt="">
                     </span>
             <span class="logo-sm">
-                        Good Wanderers
+                        Prosperity Realestate
                     </span>
         </a>
 
         <!-- LOGO -->
         <a href="{{route('admin.dashboard')}}" class="logo text-center logo-dark">
                     <span class="logo-lg">
-                       <img src="{{ asset('/asset/img/logo.png') }}" alt="Good Wanderers Logo" class="image mr-4 rounded-3" width="25">
-                        Good Wanderers
+                       <img src="{{ asset('assets/img/Prosperity_Real_Estate_Logo_Final.png') }}" alt="Prosperity company real estate" class="image mr-4 rounded-3" width="55px">
+                        Prosperity Realestate
                     </span>
             <span class="logo-sm">
-                        Good Wanderers
+                <img src="{{ asset('assets/img/Prosperity_Real_Estate_Logo_Final.png') }}" alt="Prosperity company real estate" class="image mr-4 rounded-3" width="73px">
+
+                        {{-- Prosperity company real estate --}}
                     </span>
         </a>
 
@@ -116,7 +118,7 @@
                         <span> Blog </span>
                     </a>
                 </li>
-                <li>
+                <li class="side-nav-item">
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
@@ -223,7 +225,7 @@
                 <div class="row">
                     <div class="col-md-6 text-center">
                         <script>document.write(new Date().getFullYear())</script>
-                        © Good Wanderers
+                        © Prosperity Company Realestate
                     </div>
                     <div class="col-md-6">
 

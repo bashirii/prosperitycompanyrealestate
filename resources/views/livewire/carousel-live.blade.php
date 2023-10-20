@@ -9,26 +9,45 @@
                         <button class="btn btn-warning btn-sm  float-end" wire:click="closeForm"><i class="uil-cancel"></i> Cancel</button>
                     </div>
                     <div class="card-body">
-                        <div class="mb-2">
-                            <label for="image" class="form-label font-12">Image <span class="required">*</span></label>
-                            <input type="file" wire:model="file" id="image" accept="image/*" class="form-control form-control-sm">
-                            @error('file') <span class="error">{{ $message }}</span> @enderror
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label for="image" class="form-label font-12">Image <span class="required">*</span></label>
+                                <input type="file" wire:model="file" id="image" accept="image/*" class="form-control form-control-sm">
+                                @error('file') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="name" class="form-label font-12">Name <span class="required">*</span></label>
+                                <input type="text" wire:model="name" id="name" class="form-control form-control-sm">
+                                @error('name') <span class="error">{{ $message }}</span> @enderror
+                            </div>
                         </div>
-                        <div class="mb-2">
-                            <label for="address" class="form-label font-12">Address <span class="required">*</span></label>
-                            <input type="text" wire:model="address" id="address" class="form-control form-control-sm">
-                            @error('address') <span class="error">{{ $message }}</span> @enderror
+
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label for="p_o_box" class="form-label font-12">P.O.Box <span class="required">*</span></label>
+                                <input type="text" wire:model="p_o_box" id="p_o_box" class="form-control form-control-sm">
+                                @error('p_o_box') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="address" class="form-label font-12">Address <span class="required">*</span></label>
+                                <input type="text" wire:model="address" id="address" class="form-control form-control-sm">
+                                @error('address') <span class="error">{{ $message }}</span> @enderror
+                            </div>
                         </div>
-                        <div class="mb-2">
-                            <label for="location" class="form-label font-12">location <span class="required">*</span></label>
-                            <input type="text" wire:model="location" id="image" class="form-control form-control-sm">
-                            @error('location') <span class="error">{{ $message }}</span> @enderror
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label for="location" class="form-label font-12">location <span class="required">*</span></label>
+                                <input type="text" wire:model="location" id="location" class="form-control form-control-sm">
+                                @error('location') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="price" class="form-label font-12">$ Price <span class="required">*</span></label>
+                                <input type="text" wire:model="price" id="image" class="form-control form-control-sm">
+                                @error('price') <span class="error">{{ $message }}</span> @enderror
+                            </div>
                         </div>
-                        <div class="mb-2">
-                            <label for="price" class="form-label font-12">$ Price <span class="required">*</span></label>
-                            <input type="text" wire:model="price" id="image" class="form-control form-control-sm">
-                            @error('price') <span class="error">{{ $message }}</span> @enderror
-                        </div>
+                        
                         <button type="button" class="btn btn-success" wire:click="save" wire:loading.attr="disabled">
                             <span wire:loading.remove>Save</span>
                             <span wire:loading>Saving...</span>
@@ -56,6 +75,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Image</th>
+                                <th>Name</th>
                                 <th>Address</th>
                                 <th>Location</th>
                                 <th>Price</th>
@@ -74,7 +94,10 @@
                                         <img src="{{ asset('storage/' . $item->image) }}" alt="destination image" class="img" width="30px;" height="30px" srcset="">
                                     </td>
                                     <td>
-                                        {{ $item->address }}
+                                        {{ $item->name }}
+                                    </td>
+                                    <td>
+                                        {{ $item->p_o_box . ' ' . $item->address }}
                                     </td>
                                     <td>
                                         {{ $item->location }}

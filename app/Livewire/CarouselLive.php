@@ -22,16 +22,18 @@ class CarouselLive extends Component
     public $user;
 
 
-    public $file;
+    public $file, $name, $p_o_box, $address, $location, $price;
     public $item;
 
     public $isEditMode = false;
 
     public $rules = [
         'file' => ['nullable','required_if:isEditMode,false', 'image'],
-        'address' => ['required','interger'],
-        'location'=>['required'],
-        'price'=>['required|regex:/^\d+(\.\d{1,2})?$/'],
+        'name' => ['required','string'],
+        'p_o_box' => ['required','integer'],
+        'address' => ['required','string'],
+        'location'=>['required', 'string'],
+        'price'=>['required','integer'],
 
     ];
 
@@ -50,19 +52,31 @@ class CarouselLive extends Component
                 $file_path = ((new FileUploadService())->upload("carousel-items", $this->file));
                 $this->carousel->image = $file_path;
             }
+            $this->carousel->name = $this->name;
+            $this->carousel->p_o_box = $this->p_o_box;
+            $this->carousel->address = $this->address;
+            $this->carousel->location = $this->location;
+            $this->carousel->price = $this->price;
+
             $this->carousel->save();
 
-            $this->dispatchBrowserEvent('success_alert', 'Carousel Item  updated.');
+            $this->dispatch('success_alert', 'Carousel Item  updated.');
 
         }else{
             $file_path = ((new FileUploadService())->upload("carousel-items", $this->file));
 
             $this->carousel->created_by = Auth::user()->id;
             $this->carousel->image = $file_path;
+            
+            $this->carousel->name = $this->name;
+            $this->carousel->p_o_box = $this->p_o_box;
+            $this->carousel->address = $this->address;
+            $this->carousel->location = $this->location;
+            $this->carousel->price = $this->price;
 
             $this->carousel->save();
 
-            $this->dispatchBrowserEvent('success_alert', 'Carousel Item saved.');
+            $this->dispatch('success_alert', 'Carousel Item saved.');
         }
 
         $this->closeForm();

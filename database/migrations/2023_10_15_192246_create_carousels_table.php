@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('created_by');
             $table->string('image');
+            $table->string('name');
+            $table->integer('p_o_box');
             $table->string('address');
             $table->string('location');
             $table->integer('price');

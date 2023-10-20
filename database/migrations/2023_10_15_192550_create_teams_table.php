@@ -16,11 +16,12 @@ return new class extends Migration
             $table->unsignedBigInteger('created_by');
             $table->string('img');
             $table->string('name');
+            $table->string('description')->nullable();
             $table->string('phone');
             $table->string('email');
-            $table->string('facebook')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('instagram')->nullable();
+            $table->string('facebook_link')->nullable();
+            $table->string('twitter_link')->nullable();
+            $table->string('instagram_link')->nullable();
             $table->timestamps();
 
 

@@ -10,7 +10,7 @@
 
     <div class="swiper-wrapper">
 
-     {{-- @foreach($carousel as $key => $item)
+     @foreach($carousel as $key => $item)
       <div class="swiper-slide carousel-item-a intro-item bg-image {{ $loop->first ? 'active' : '' }}" style="background-image: url({{ asset('storage/'.$item->image) }})">
         <div class="overlay overlay-a"></div>
         <div class="intro-content display-table">
@@ -19,8 +19,12 @@
               <div class="row">
                 <div class="col-lg-8">
                   <div class="intro-body">
+                    <p class="intro-title-top">{{$item->address}}
+                      <br> {{$item->p_o_box}}
+                    </p>
                     <h1 class="intro-title mb-4 ">
-                      <span class="color-b">{{$item->address}} </span>
+                      <span class="color-b">{{$item->name}} </span>
+                      {{-- <span class="color-b">{{$item->address}} </span> --}}
                       <br> {{$item->location}}
                     </h1>
                     <p class="intro-subtitle intro-price">
@@ -33,9 +37,9 @@
           </div>
         </div>
       </div>
-      @endforeach --}}
+      @endforeach
 
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(assets/img/slide-2.jpeg)">
+      {{-- <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(assets/img/slide-2.jpeg)">
         <div class="overlay overlay-a"></div>
         <div class="intro-content display-table">
           <div class="table-cell">
@@ -134,7 +138,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
     </div>
     <div class="swiper-pagination"></div>
   </div><!-- End Intro Section -->
@@ -553,8 +557,8 @@
         <div id="testimonial-carousel" class="swiper">
           <div class="swiper-wrapper">
 
-            {{-- @foreach($clients as $testimonial) --}}
-            {{-- <div class="carousel-item-a swiper-slide">
+            @foreach($clients as $testimonial)
+            <div class="carousel-item-a swiper-slide">
               <div class="testimonials-box">
                 <div class="row">
                   <div class="col-sm-12 col-md-6">
@@ -578,10 +582,10 @@
                   </div>
                 </div>
               </div>
-            </div><!-- End carousel item --> --}}
-            {{-- @endforeach --}}
+            </div><!-- End carousel item -->
+            @endforeach
 
-            <div class="carousel-item-a swiper-slide">
+            {{-- <div class="carousel-item-a swiper-slide">
               <div class="testimonials-box">
                 <div class="row">
                   <div class="col-sm-12 col-md-6">
@@ -607,7 +611,7 @@
                   </div>
                 </div>
               </div>
-            </div><!-- End carousel item -->
+            </div><!-- End carousel item --> --}}
 
           </div>
         </div>
@@ -635,7 +639,7 @@
         </div>
         <div class="row">
 
-          {{-- @foreach($team as $agent)
+          @foreach($team as $agent)
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
@@ -651,7 +655,7 @@
                 </div>
                 <div class="card-body-d">
                   <p class="content-d color-text-a">
-                    {{ $agent->preview_desc }}
+                    {{ $agent->description }}
                   </p>
                   <div class="info-agents color-a">
                     <p>
@@ -666,18 +670,23 @@
                   <div class="socials-footer d-flex justify-content-center">
                     <ul class="list-inline">
                       <li class="list-inline-item">
-                        <a href="{{ $agent->facebook }}" class="link-one">
+                        <a href="{{ $agent->facebook_link }}" class="link-one">
                           <i class="bi bi-facebook" aria-hidden="true"></i>
                         </a>
                       </li>
                       <li class="list-inline-item">
-                        <a href="{{ $agent->twitter }}" class="link-one">
+                        <a href="{{ $agent->twitter_link }}" class="link-one">
                           <i class="bi bi-twitter" aria-hidden="true"></i>
                         </a>
                       </li>
                       <li class="list-inline-item">
-                        <a href="{{ $agent->instagram }}" class="link-one">
+                        <a href="{{ $agent->instagram_link }}" class="link-one">
                           <i class="bi bi-instagram" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="{{ $agent->linkedin_link  }}" class="link-one">
+                          <i class="bi bi-linkedin" aria-hidden="true"></i>
                         </a>
                       </li>
                     </ul>
@@ -686,9 +695,9 @@
               </div>
             </div>
           </div>
-          @endforeach --}}
+          @endforeach
 
-          <div class="col-md-4">
+          {{-- <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
                 <img src="assets/img/agent-1.jpg" alt="" class="img-d img-fluid">
@@ -799,7 +808,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
     </section><!-- End Agents Section -->

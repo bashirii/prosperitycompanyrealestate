@@ -25,7 +25,7 @@ class TeamLive extends Component
 
     public $destination_id;
 
-    public $facebook_link;
+    public $facebook_link, $name, $email, $phone, $description;
     public $twitter_link;
     public $linkedin_link;
     public $instagram_link;
@@ -35,13 +35,15 @@ class TeamLive extends Component
     public $isEditMode = false;
 
     public $rules = [
-        'name' => ['required'],
+        'name' => ['required', 'string'],
         'email' => 'required|email',
-        'phone' => 'required|integer',
+        'phone' => ['required', 'string'],
         'file' => ['nullable','required_if:isEditMode,false', 'image'],
-        'facebook_link' => 'nullable|url',
-        'twitter_link' => 'nullable|url',
-        'instagram_link' => 'nullable|url',
+        // 'package_id' => ['required', 'string'],
+        'description' => ['required', 'string'],
+        'facebook_link' => ['required', 'string'],
+        'twitter_link' => ['required', 'string'],
+        'instagram_link' => ['required', 'string'],
     ];
 
     public function mount()
@@ -58,10 +60,20 @@ class TeamLive extends Component
             if (!empty($this->file)){
                 $file_path = ((new FileUploadService())->upload("Team", $this->file));
                 $this->agent->img = $file_path;
+                
             }
+
+            $this->agent->name = $this->name;
+            $this->agent->phone = $this->phone;
+            $this->agent->email = $this->email;
+            $this->agent->description = $this->description;
+            $this->agent->facebook_link = $this->facebook_link;
+            $this->agent->twitter_link = $this->twitter_link;
+            $this->agent->instagram_link = $this->instagram_link;
+
             $this->agent->save();
 
-            $this->dispatchBrowserEvent('success_alert', 'Team updated.');
+            $this->dispatch('success_alert', 'Team updated.');
 
         }else{
             $file_path = ((new FileUploadService())->upload("Team", $this->file));
@@ -69,9 +81,17 @@ class TeamLive extends Component
             $this->agent->created_by = Auth::user()->id;
             $this->agent->img = $file_path;
 
+            $this->agent->name = $this->name;
+            $this->agent->phone = $this->phone;
+            $this->agent->email = $this->email;
+            $this->agent->description = $this->description;
+            $this->agent->facebook_link = $this->facebook_link;
+            $this->agent->twitter_link = $this->twitter_link;
+            $this->agent->instagram_link = $this->instagram_link;
+
             $this->agent->save();
 
-            $this->dispatchBrowserEvent('success_alert', 'agent saved.');
+            $this->dispatch('success_alert', 'agent saved.');
         }
 
         $this->closeForm();

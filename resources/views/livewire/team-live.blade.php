@@ -10,26 +10,55 @@
                             <button class="btn btn-warning btn-sm  float-end" wire:click="closeForm"><i class="uil-cancel"></i> Cancel</button>
                         </div>
                         <div class="card-body">
-                            <div class="mb-2">
-                                <label for="name" class="form-label font-12">agent Name <span class="required">*</span></label>
-                                <input type="text" wire:model="name" id="name" class="form-control form-control-sm">
-                                @error('name') <span class="error">{{ $message }}</span> @enderror
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <label for="name" class="form-label font-12">agent Name <span class="required">*</span></label>
+                                    <input type="text" wire:model="name" id="name" class="form-control form-control-sm">
+                                    @error('name') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="image" class="form-label font-12">Image <span class="required">*</span></label>
+                                    <input type="file" wire:model="file" id="image" accept="image/*" class="form-control form-control-sm">
+                                    @error('file') <span class="error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label for="image" class="form-label font-12">Image <span class="required">*</span></label>
-                                <input type="file" wire:model="file" id="image" accept="image/*" class="form-control form-control-sm">
-                                @error('file') <span class="error">{{ $message }}</span> @enderror
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <label for="phone" class="form-label font-12">Phone No:<span class="required">*</span></label>
+                                    <input type="text" wire:model="phone" id="phone" class="form-control form-control-sm">
+                                    @error('phone') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="email" class="form-label font-12">Email<span class="required">*</span></label>
+                                    <input type="email" wire:model="email" id="email" class="form-control form-control-sm">
+                                    @error('email') <span class="error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label for="phone" class="form-label font-12">Phone No:<span class="required">*</span></label>
-                                <input type="text" wire:model="phone" id="phone" class="form-control form-control-sm">
-                                @error('phone') <span class="error">{{ $message }}</span> @enderror
+
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <label for="description" class="form-label font-12">Email<span class="required">*</span></label>
+                                    <textarea wire:model="description" id="description" class="form-control form-control-sm"cols="30" rows="5"></textarea>
+                                    @error('description') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                <div class=" col-md-6 mb-2">
+                                    <label class="form-label">Social Links</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">Facebook</span>
+                                        <input type="text" class="form-control" wire:model="facebook_link">
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-text">Twitter</span>
+                                        <input type="text" class="form-control" wire:model="twitter_link">
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-text">Instagram</span>
+                                        <input type="text" class="form-control" wire:model="instagram_link">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label for="email" class="form-label font-12">Email<span class="required">*</span></label>
-                                <input type="email" wire:model="email" id="email" class="form-control form-control-sm">
-                                @error('email') <span class="error">{{ $message }}</span> @enderror
-                            </div>
+                            
                             {{-- <div class="mb-2">
                                 <label for="destination_id" class="form-label">Destination<span class="required">*</span></label>
                                 <select class="form-control" wire:model="destination_id" id="destination_id">
@@ -41,21 +70,7 @@
                                 @error('destination_id') <span class="error">{{ $message }}</span> @enderror
                             </div> --}}
 
-                            <div class="mb-2">
-                                <label class="form-label">Social Links</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">Facebook</span>
-                                    <input type="text" class="form-control" wire:model="facebook_link">
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-text">Twitter</span>
-                                    <input type="text" class="form-control" wire:model="twitter_link">
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-text">Instagram</span>
-                                    <input type="text" class="form-control" wire:model="instagram_link">
-                                </div>
-                            </div>
+                            
 
                             <button type="button" class="btn btn-success" wire:click="save" wire:loading.attr="disabled">
                                 <span wire:loading.remove>Save</span>
@@ -89,6 +104,7 @@
                                     <th>Email</th>
                                     <th>Facebook</th>
                                     <th>Twitter</th>
+                                    <th>Linkedin</th>
                                     <th>Instagram</th>
                                     {{-- <th>Status</th> --}}
                                     <th>Created At</th>
@@ -194,7 +210,7 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <p class="col ">Recorded by:<span class="fw-bold"> {{ $agent->user->name }}</span></p>
+                            <p class="col ">Recorded by:<span class="fw-bold"> {{ optional($agent->user)->name }}</span></p>
                         </div>
                     </div>
                     <div class="modal-footer">

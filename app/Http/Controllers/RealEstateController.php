@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carousel;
+use App\Models\Team;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class RealEstateController extends Controller
@@ -19,11 +22,11 @@ public function home()
     $templatePath = $this->getTemplatePath($templateName);
 
     $data = [
-        // 'carousel' => Carousel::latest()->get(),
+        'carousel' => Carousel::latest()->get(),
         // 'destinations' => Destination::latest()->limit(6)->get(),
         // 'packages' => Package::latest()->limit(6)->get(),
-        // 'guides' => Guide::latest()->limit(4)->get(),
-        // 'clients' => Testimonial::latest()->limit(4)->get(),
+        'team' => Team::latest()->limit(3)->get(),
+        'clients' => Testimonial::latest()->get(),
         // 'blogs' => Blog::latest()->limit(3)->get()
     ];
 

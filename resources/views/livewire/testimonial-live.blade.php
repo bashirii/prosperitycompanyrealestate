@@ -12,8 +12,8 @@
                         <div class="card-body">
                             <div class="mb-2">
                                 <label for="name" class="form-label font-12">Testimonial Name <span class="required">*</span></label>
-                                <input type="text" wire:model="Testimonial.name" id="name" class="form-control form-control-sm">
-                                @error('Testimonial.name') <span class="error">{{ $message }}</span> @enderror
+                                <input type="text" wire:model="name" id="name" class="form-control form-control-sm">
+                                @error('name') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="mb-2">
                                 <label for="image" class="form-label font-12">Image <span class="required">*</span></label>
@@ -22,8 +22,8 @@
                             </div>
                             <div class="mb-2">
                                 <label for="preview_desc" class="form-label">Description <span class="required">*</span></label>
-                                <textarea class="form-control" wire:model="Testimonial.preview_desc" id="preview_desc" rows="3"></textarea>
-                                @error('Testimonial.preview_desc') <span class="error">{{ $message }}</span> @enderror
+                                <textarea class="form-control" wire:model="preview_desc" id="preview_desc" rows="3"></textarea>
+                                @error('preview_desc') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <button type="button" class="btn btn-success" wire:click="save" wire:loading.attr="disabled">
                                 <span wire:loading.remove>Save</span>
@@ -136,7 +136,7 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <p class="col ">Recorded by:<span class="fw-bold"> {{ $Testimonial->user->name }}</span></p>
+                            <p class="col ">Recorded by:<span class="fw-bold"> {{ optional($Testimonial->user)->name }}</span></p>
                         </div>
                     </div>
                     <div class="modal-footer">

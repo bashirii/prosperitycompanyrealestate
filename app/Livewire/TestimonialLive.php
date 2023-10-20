@@ -18,7 +18,7 @@ class TestimonialLive extends Component
     public $viewForm = false;
 
     public $keywords;
-    public $Testimonial;
+    public $Testimonial, $name, $preview_desc;
     public $user;
 
 
@@ -27,8 +27,8 @@ class TestimonialLive extends Component
     public $isEditMode = false;
 
     public $rules = [
-        'Testimonial.name' => ['required'],
-        'Testimonial.preview_desc' => ['required'],
+        'name' => ['required', 'string'],
+        'preview_desc' => ['required', 'string'],
         'file' => ['nullable','required_if:isEditMode,false', 'image']
     ];
 
@@ -47,9 +47,13 @@ class TestimonialLive extends Component
                 $file_path = ((new FileUploadService())->upload("testimonials", $this->file));
                 $this->Testimonial->img = $file_path;
             }
+
+            $this->Testimonial->name = $this->name;
+            $this->Testimonial->preview_desc = $this->preview_desc;
+
             $this->Testimonial->save();
 
-            $this->dispatchBrowserEvent('success_alert', 'Testimonial updated.');
+            $this->dispatch('success_alert', 'Testimonial updated.');
 
         }else{
             $file_path = ((new FileUploadService())->upload("testimonials", $this->file));
@@ -57,9 +61,12 @@ class TestimonialLive extends Component
             $this->Testimonial->created_by = Auth::user()->id;
             $this->Testimonial->img = $file_path;
 
+            $this->Testimonial->name = $this->name;
+            $this->Testimonial->preview_desc = $this->preview_desc;
+
             $this->Testimonial->save();
 
-            $this->dispatchBrowserEvent('success_alert', 'Testimonial saved.');
+            $this->dispatch('success_alert', 'Testimonial saved.');
         }
 
         $this->closeForm();
