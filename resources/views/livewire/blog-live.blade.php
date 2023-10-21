@@ -17,8 +17,8 @@
                             </div>
                             <div class="mb-2">
                                 <label for="preview_desc" class="form-label">Description <span class="required">*</span></label>
-                                <textarea class="form-control" wire:model="blog.preview_desc" id="preview_desc" rows="3"></textarea>
-                                @error('blog.preview_desc') <span class="error">{{ $message }}</span> @enderror
+                                <textarea wire:model="preview_desc" id="preview_desc" class="form-control form-control-sm"cols="30" rows="5"></textarea>
+                                @error('preview_desc') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <button type="button" class="btn btn-success" wire:click="save" wire:loading.attr="disabled">
                                 <span wire:loading.remove>Save</span>
@@ -129,9 +129,9 @@
                             <p>{{ $blog->preview_desc }}</p>
                         </div>
                         <hr>
-                        <div class="row">
+                        {{-- <div class="row">
                             <p class="col ">Recorded by:<span class="fw-bold"> {{ $blog->user->name }}</span></p>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>

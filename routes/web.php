@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminPanelController;
@@ -61,7 +62,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
 
     Route::group(['middleware' => 'auth'], function (){
-        
+
         Route::get('forgot_password', [LoginController::class, 'logout'])->name('forgot_password');
 
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');

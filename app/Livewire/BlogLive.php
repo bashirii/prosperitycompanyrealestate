@@ -18,7 +18,7 @@ class BlogLive extends Component
     public $viewForm = false;
 
     public $keywords;
-    public $blog;
+    public $blog, $preview_desc;
     public $user;
 
     public $file;
@@ -27,7 +27,7 @@ class BlogLive extends Component
 
     public $rules = [
         // 'blog.date' => 'required|date|date_format:Y-m-d|after_or_equal:today',
-        'blog.preview_desc' => ['required'],
+        'preview_desc' => ['required', 'string'],
         'file' => ['nullable','required_if:isEditMode,false', 'image']
     ];
 
@@ -43,22 +43,27 @@ class BlogLive extends Component
         if ($this->isEditMode){
 
             if (!empty($this->file)){
-                $file_path = ((new FileUploadService())->upload("Blog", $this->file));
+                $file_path = ((new FileUploadService())->upload("blog", $this->file));
                 $this->blog->img = $file_path;
             }
+            $this->blog->preview_desc = $this->preview_desc;
+
             $this->blog->save();
 
-            $this->dispatchBrowserEvent('success_alert', 'blog updated.');
+            $this->dispatch('success_alert', 'Blog updated.');
 
         }else{
-            $file_path = ((new FileUploadService())->upload("B;og", $this->file));
+            $file_path = ((new FileUploadService())->upload("blog", $this->file));
 
             $this->blog->created_by = Auth::user()->id;
             $this->blog->img = $file_path;
 
+            $this->blog->preview_desc = $this->preview_desc;
+
             $this->blog->save();
 
-            $this->dispatchBrowserEvent('success_alert', 'blog saved.');
+            $this->dispatch('success_alert', 'Blog saved.');
+
         }
 
         $this->closeForm();
@@ -139,6 +144,10 @@ class BlogLive extends Component
         $this->viewForm = true;
         $this->isEditMode = true;
         $this->blog = Blog::find($id);
+
+        $this->file = $this->blog->file;
+        $this->preview_desc + $this->blog->preview_desc;
+
 
     }
 

@@ -28,7 +28,7 @@ public function home()
         'properties' => Property::latest()->limit(6)->get(),
         'team' => Team::latest()->limit(3)->get(),
         'clients' => Testimonial::latest()->get(),
-        // 'blogs' => Blog::latest()->limit(3)->get()
+        'blogs' => Blog::latest()->limit(3)->get()
     ];
 
     return view($templatePath, $data);
