@@ -97,13 +97,13 @@
                 <li class="side-nav-item">
                     <a href="{{route('admin.property')}}" class="side-nav-link">
                         <i class="uil-newspaper"></i>
-                        <span> Packages </span>
+                        <span> Properties </span>
                     </a>
                 </li>
                 <li class="side-nav-item">
                     <a href="{{route('admin.team')}}" class="side-nav-link">
                         <i class="uil-book"></i>
-                        <span> Guides </span>
+                        <span> Agents </span>
                     </a>
                 </li>
                 <li class="side-nav-item">

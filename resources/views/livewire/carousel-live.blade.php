@@ -118,7 +118,7 @@
                                     <td class="text-center">
                                         <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$item->id }}')"><i class="uil-eye"></i></button>
                                         <button class="btn btn-warning btn-sm" wire:click="prepareEditcarousel('{{$item->id }}')"><i class="uil-edit"></i></button>
-                                        <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$item->id }}')"><i class="uil-trash"></i></button>
+                                        {{-- <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$item->id }}')"><i class="uil-trash"></i></button> --}}
                                     </td>
                                 </tr>
                             @empty

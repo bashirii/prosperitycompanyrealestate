@@ -142,6 +142,10 @@ class TestimonialLive extends Component
         $this->isEditMode = true;
         $this->Testimonial = Testimonial::find($id);
 
+        $this->name = $this->Testimonial->name;
+        $this->preview_desc = $this->Testimonial->preview_desc;
+        $this->file = $this->Testimonial->img;
+
     }
 
 }

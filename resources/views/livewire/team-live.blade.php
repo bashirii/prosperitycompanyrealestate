@@ -38,7 +38,7 @@
 
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="description" class="form-label font-12">Email<span class="required">*</span></label>
+                                    <label for="description" class="form-label font-12">Discription<span class="required">*</span></label>
                                     <textarea wire:model="description" id="description" class="form-control form-control-sm"cols="30" rows="5"></textarea>
                                     @error('description') <span class="error">{{ $message }}</span> @enderror
                                 </div>
@@ -102,6 +102,7 @@
                                     <th>Name</th>
                                     <th>Phone</th>
                                     <th>Email</th>
+                                    <th>Descripiton</th>
                                     <th>Facebook</th>
                                     <th>Twitter</th>
                                     <th>Linkedin</th>
@@ -130,6 +131,8 @@
 
                                         <td>{{ $agent->email }}</td>
 
+                                        <td>{{ Str::limit($agent->description, 10) }}</td>
+
                                         <!-- Add columns for social links here -->
                                         <td>{{ $agent->facebook_link  }}</td>
                                         <td>{{ $agent->twitter_link  }}</td>
@@ -149,8 +152,8 @@
                                         </td>
                                         <td class="text-center">
                                             <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$agent->id }}')"><i class="uil-eye"></i></button>
-                                            <button class="btn btn-warning btn-sm" wire:click="prepareEditagent('{{$agent->id }}')"><i class="uil-edit"></i></button>
-                                            <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$agent->id }}')"><i class="uil-trash"></i></button>
+                                            <button class="btn btn-warning btn-sm" wire:click="prepareEditAgent('{{$agent->id }}')"><i class="uil-edit"></i></button>
+                                            {{-- <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$agent->id }}')"><i class="uil-trash"></i></button> --}}
                                         </td>
                                     </tr>
                                 @empty

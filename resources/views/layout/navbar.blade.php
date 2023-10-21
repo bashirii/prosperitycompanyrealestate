@@ -128,7 +128,11 @@
             <a class="nav-link " href="{{route('blog_grid')}}">Blog</a>
           </li>
 
-          <li class="nav-item dropdown">
+          <li class="nav-item">
+            <a class="nav-link " href="{{route('agents_grid')}}">Agents</a>
+          </li>
+
+          {{-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
             <div class="dropdown-menu">
               <a class="dropdown-item " href="{{route('property_single')}}">Property Single</a>
@@ -136,7 +140,7 @@
               <a class="dropdown-item " href="{{route('agents_grid')}}">Agents Grid</a>
               <a class="dropdown-item " href="{{route('agent_single')}}">Agent Single</a>
             </div>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link " href="{{route('contact')}}">Contact</a>
           </li>

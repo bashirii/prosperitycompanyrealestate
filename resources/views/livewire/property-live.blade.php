@@ -10,51 +10,83 @@
                             <button class="btn btn-warning btn-sm  float-end" wire:click="closeForm"><i class="uil-cancel"></i> Cancel</button>
                         </div>
                         <div class="card-body">
-                            <div class="mb-2">
-                                <label for="name" class="form-label font-12"> Name <span class="required">*</span></label>
-                                <input type="text" wire:model="name" id="name" class="form-control form-control-sm">
-                                @error('name') <span class="error">{{ $message }}</span> @enderror
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <label for="property_id" class="form-label font-12"> Property ID <span class="required">*</span></label>
+                                    <input type="number" wire:model="property_id" id="property_id" class="form-control form-control-sm">
+                                    @error('property_id') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="image" class="form-label font-12">Image <span class="required">*</span></label>
+                                    <input type="file" wire:model="file" id="image" accept="image/*" class="form-control form-control-sm">
+                                    @error('file') <span class="error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
                             <div class="mb-2">
-                                <label for="image" class="form-label font-12">Image <span class="required">*</span></label>
-                                <input type="file" wire:model="file" id="image" accept="image/*" class="form-control form-control-sm">
-                                @error('file') <span class="error">{{ $message }}</span> @enderror
+                                <div class="input-group">
+                                    <span class="input-group-text">Youtube</span>
+                                    <input type="text" class="form-control" wire:model="youtube_link">
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label for="address" class="form-label">Address <span class="required">*</span></label>
-                                <input type="text" wire:model="address" id="address" class="form-control form-control-sm">
-                                @error('address') <span class="error">{{ $message }}</span> @enderror
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <label for="description" class="form-label font-12">Description<span class="required">*</span></label>
+                                    <textarea wire:model="description" id="description" class="form-control form-control-sm" cols="30" rows="3"></textarea>
+                                    @error('description') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="agent_id" class="form-label font-12">Agent <span class="required">*</span></label>
+                                    <select wire:model="agent_id" id="agent_id" class="form-control form-control-sm">
+                                        <option value="" selcted><b>Select agent </b></option>
+                                        @foreach ($agents as $agent)
+                                            <option value="{{ $agent->id }}">{{ $agent->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('agent_id') <span class="error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label for="location" class="form-label">Location <span class="required">*</span></label>
-                                <input type="text" wire:model="location" id="location" class="form-control form-control-sm">
-                                @error('location') <span class="error">{{ $message }}</span> @enderror
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-2">
+                                    <label for="address" class="form-label">Address <span class="required">*</span></label>
+                                    <input type="text" wire:model="address" id="address" class="form-control form-control-sm">
+                                    @error('address') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="location" class="form-label">Location <span class="required">*</span></label>
+                                    <input type="text" wire:model="location" id="location" class="form-control form-control-sm">
+                                    @error('location') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="price" class="form-label">Price <span class="required">*</span></label>
+                                    <input type="number" wire:model="price" id="price" class="form-control form-control-sm">
+                                    @error('price') <span class="error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label for="price" class="form-label">Price <span class="required">*</span></label>
-                                <input type="text" wire:model="price" id="price" class="form-control form-control-sm">
-                                @error('price') <span class="error">{{ $message }}</span> @enderror
+                            
+                            <div class="row">
+                                <div class="col-md-3 mb-2">
+                                    <label for="area" class="form-label">Area (m<sup>2</sup>) <span class="required">*</span></label>
+                                    <input type="number" wire:model="area" id="area" class="form-control form-control-sm">
+                                    @error('area') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="beds" class="form-label">Beds <span class="required">*</span></label>
+                                    <input type="number" wire:model="beds" id="beds" class="form-control form-control-sm">
+                                    @error('beds') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="baths" class="form-label">Baths <span class="required">*</span></label>
+                                    <input type="number" wire:model="baths" id="baths" class="form-control form-control-sm">
+                                    @error('baths') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="garages" class="form-label">Garages <span class="required">*</span></label>
+                                    <input type="number" wire:model="garages" id="garages" class="form-control form-control-sm">
+                                    @error('garages') <span class="error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label for="area" class="form-label">Area <span class="required">*</span></label>
-                                <input type="text" wire:model="area" id="area" class="form-control form-control-sm">
-                                @error('area') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="mb-2">
-                                <label for="beds" class="form-label">Beds <span class="required">*</span></label>
-                                <input type="text" wire:model="beds" id="beds" class="form-control form-control-sm">
-                                @error('beds') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="mb-2">
-                                <label for="baths" class="form-label">Baths <span class="required">*</span></label>
-                                <input type="text" wire:model="baths" id="baths" class="form-control form-control-sm">
-                                @error('baths') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="mb-2">
-                                <label for="garages" class="form-label">Garages <span class="required">*</span></label>
-                                <input type="text" wire:model="garages" id="garages" class="form-control form-control-sm">
-                                @error('garages') <span class="error">{{ $message }}</span> @enderror
-                            </div>
+                            
                             <button type="button" class="btn btn-success" wire:click="save" wire:loading.attr="disabled">
                                 <span wire:loading.remove>Save</span>
                                 <span wire:loading>Saving...</span>
@@ -67,7 +99,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header ">
-                         Property
+                         Properties
                         <button class="btn btn-primary btn-sm  float-end" wire:click="showForm"><i class="uil-plus"></i> Add Property</button>
                     </div>
                     <div class="card-body">
@@ -81,12 +113,14 @@
                                 <thead class="table-dark">
                                 <tr>
                                     <th>#</th>
-                                    <th>Name</th>
+                                    <th>property_id</th>
+                                    <th>Description</th>
                                     <th>Image</th>
+                                    <th>Youtube video</th>
                                     <th>Address</th>
                                     <th>Location</th>
                                     <th>Price</th>
-                                    <th>Area</th>
+                                    <th>Area (m<sup>2</sup>)</th>
                                     <th>Beds</th>
                                     <th>Baths</th>
                                     <th>Garages</th>
@@ -106,7 +140,9 @@
                                         <td class="">
                                             <img src="{{ asset('storage/' . $property->img) }}" alt="property image" class="img" width="30px;" height="30px" srcset="">
                                         </td>
-                                        <td>{{ $property->name }}</td>
+                                        <td>{{ $property->property_id }}</td>
+                                        <td>{{ $property->youtube_link }}</td>
+                                        <td>{{ Str::limit($property->description, 10) }}</td>
                                         <td>
                                             {{ $property->address }}
                                         </td>
@@ -142,8 +178,8 @@
 
                                         <td class="text-center">
                                             <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$property->id }}')"><i class="uil-eye"></i></button>
-                                            <button class="btn btn-warning btn-sm" wire:click="prepareEditproperty('{{$property->id }}')"><i class="uil-edit"></i></button>
-                                            <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$property->id }}')"><i class="uil-trash"></i></button>
+                                            <button class="btn btn-warning btn-sm" wire:click="prepareEditProperty('{{$property->id }}')"><i class="uil-edit"></i></button>
+                                            {{-- <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$property->id }}')"><i class="uil-trash"></i></button> --}}
                                         </td>
                                     </tr>
                                 @empty
@@ -176,7 +212,7 @@
                                         <p class="font-14">{{ $property->created_at }}</p>
                                     </div>
                                     <div class="col-12">
-                                        <h2 class="font-16">{{ $property->name }}</h2>
+                                        <h2 class="font-16">{{ $property->property_id }}</h2>
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +248,7 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <p class="col ">Recorded by:<span class="fw-bold"> {{ $property->user->name }}</span></p>
+                            <p class="col ">Recorded by:<span class="fw-bold"> {{ optional($property->user)->name }}</span></p>
                         </div>
                     </div>
                     <div class="modal-footer">

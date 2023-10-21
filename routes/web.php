@@ -45,7 +45,7 @@ Route::get('/contact', [RealEstateController::class, 'contact'])
 Route::get('/property_grid', [RealEstateController::class, 'property_grid'])
     ->name('property_grid');
 
-Route::get('/property_single', [RealEstateController::class, 'property_single'])
+Route::get('/property_single/{property_id}', [RealEstateController::class, 'property_single'])
     ->name('property_single');
 
 // Route::get('/testimonial', [RealEstateController::class, 'testimonial'])

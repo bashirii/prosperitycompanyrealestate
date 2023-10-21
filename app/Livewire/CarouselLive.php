@@ -135,11 +135,18 @@ class CarouselLive extends Component
         $this->emit('showDeleteModal');
     }
 
-    public function prepareEditcarousel($id)
+    public function prepareEditCarousel($id)
     {
         $this->viewForm = true;
         $this->isEditMode = true;
         $this->carousel = carousel::find($id);
+
+        $this->name = $this->carousel->name;
+        $this->file = $this->carousel->image;
+        $this->p_o_box = $this->carousel->p_o_box;
+        $this->address = $this->carousel->address;
+        $this->location = $this->carousel->location;
+        $this->price = $this->carousel->price;
 
     }
 }

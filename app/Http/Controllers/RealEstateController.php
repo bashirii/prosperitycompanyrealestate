@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carousel;
+use App\Models\Property;
 use App\Models\Team;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ public function home()
     $data = [
         'carousel' => Carousel::latest()->get(),
         // 'destinations' => Destination::latest()->limit(6)->get(),
-        // 'packages' => Package::latest()->limit(6)->get(),
+        'properties' => Property::latest()->limit(6)->get(),
         'team' => Team::latest()->limit(3)->get(),
         'clients' => Testimonial::latest()->get(),
         // 'blogs' => Blog::latest()->limit(3)->get()
@@ -111,19 +112,20 @@ public function property_grid()
     $templatePath = $this->getTemplatePath($templateName);
 
     $data = [
+        'properties' => Property::latest()->limit(6)->get(),
 
     ];
 
     return view($templatePath, $data);
 }
 
-public function property_single()
+public function property_single($property_id)
 {
     $templateName = 'RealEstate.property_single';
     $templatePath = $this->getTemplatePath($templateName);
 
     $data = [
-
+        'property' => Property::findOrFail($property_id)
     ];
 
     return view($templatePath, $data);

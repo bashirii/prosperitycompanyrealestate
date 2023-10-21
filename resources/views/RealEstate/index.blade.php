@@ -332,7 +332,7 @@
         <div id="property-carousel" class="swiper">
           <div class="swiper-wrapper">
 
-            {{-- @foreach($properties as $property)
+            @foreach($properties as $property)
             <div class="carousel-item-b swiper-slide">
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
@@ -380,9 +380,9 @@
                 </div>
               </div>
             </div><!-- End carousel item -->
-            @endforeach --}}
+            @endforeach
 
-            <div class="carousel-item-b swiper-slide">
+            {{-- <div class="carousel-item-b swiper-slide">
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
                   <img src="assets/img/property-2.jpg" alt="" class="img-a img-fluid">
@@ -476,9 +476,9 @@
                   </div>
                 </div>
               </div>
-            </div><!-- End carousel item -->
+            </div><!-- End carousel item --> --}}
 
-            <div class="carousel-item-b swiper-slide">
+            {{-- <div class="carousel-item-b swiper-slide">
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
                   <img src="assets/img/property-4.jpg" alt="" class="img-a img-fluid">
@@ -524,7 +524,7 @@
                   </div>
                 </div>
               </div>
-            </div><!-- End carousel item -->
+            </div><!-- End carousel item --> --}}
           </div>
         </div>
         <div class="propery-carousel-pagination carousel-pagination"></div>

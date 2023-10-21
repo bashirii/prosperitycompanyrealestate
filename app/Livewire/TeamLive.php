@@ -39,7 +39,6 @@ class TeamLive extends Component
         'email' => 'required|email',
         'phone' => ['required', 'string'],
         'file' => ['nullable','required_if:isEditMode,false', 'image'],
-        // 'package_id' => ['required', 'string'],
         'description' => ['required', 'string'],
         'facebook_link' => ['required', 'string'],
         'twitter_link' => ['required', 'string'],
@@ -73,7 +72,7 @@ class TeamLive extends Component
 
             $this->agent->save();
 
-            $this->dispatch('success_alert', 'Team updated.');
+            $this->dispatch('success_alert', 'Agent updated.');
 
         }else{
             $file_path = ((new FileUploadService())->upload("Team", $this->file));
@@ -91,7 +90,7 @@ class TeamLive extends Component
 
             $this->agent->save();
 
-            $this->dispatch('success_alert', 'agent saved.');
+            $this->dispatch('success_alert', 'Agent saved.');
         }
 
         $this->closeForm();
@@ -130,7 +129,7 @@ class TeamLive extends Component
         $this->emit('showViewModal');
     }
 
-    public function deleteagent()
+    public function deleteAgent()
     {
         $this->agent->delete();
         $this->emit('closeDeleteModal');
@@ -147,11 +146,21 @@ class TeamLive extends Component
     }
 
 
-    public function prepareEditNews($id)
+    public function prepareEditAgent($id)
     {
         $this->viewForm = true;
         $this->isEditMode = true;
         $this->agent = Team::find($id);
+
+        $this->name = $this->agent->name;
+        $this->file = $this->agent->image;
+        $this->phone = $this->agent->phone;
+        $this->email = $this->agent->email;
+        $this->description = $this->agent->description;
+        $this->facebook_link = $this->agent->facebook_link;
+        $this->instagram_link = $this->agent->instagram_link;
+        $this->twitter_link = $this->agent->twitter_link;
+        $this->linkedin_link = $this->agent->linkedin_link;
 
     }
 
