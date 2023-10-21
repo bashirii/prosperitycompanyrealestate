@@ -130,7 +130,7 @@ class BlogLive extends Component
     //     // $this->blog->active();
     //     // $this->blog->Inative();
     //     // $this->emit('closeDeleteModal');
-    //     // $this->dispatchBrowserEvent('success_alert', 'Successful.');
+    //     // $this->dispatch('success_alert', 'Successful.');
     //     // $this->blog = new Blog();
     // }
 
