@@ -534,9 +534,38 @@
 
     <!-- video -->
 <section class="section-agents section-t8">
-  <div class="video-container">
-    <iframe width="800" height="400" src="https://www.youtube.com/embed/PxQZXsrlzQA?si=1YJMJpcpAWB80A_K&amp;start=19" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-  </div>
+    <div class="row">
+        <h3 class="text-center">WELCOME NOTE FROM THE GENERAL MANAGER</h3>
+        <div class="col-lg-6 col-md-6 mb-4">
+            <div class="service-item bg-white text-center mb-2 py-5 px-4">
+                <img src="assets/img/manager.jpg" alt="Manager's Greeting Image" width="350" height="350" class="img-thumbnail">
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-6 mb-4">
+            <div class="service-item bg-white  mb-2 py-5 px-4">
+                <h5 class="mb-2">Welcome to Prosperity Real Estate</h5>
+                <p class="m-0">My name is Edna K. Alimwike, and I'm the General Manager.
+                    It’s our honor to serve you and give you the best.
+                    <br>
+                </p>
+                <p class="m-0">We are here to comply and work with you faithfully hand-in-hand to ensure that
+                     you get the best service, but most of all to make sure we enable you to be able to pursue
+                     in getting the land of your dreams.
+                     <br>
+                </p>
+                <p class="m-0">We encourage you to invest in land, one of the greatest investments there is and
+                     that keeps appreciating every year.,
+                    let us make it possible for you.
+                    <br>
+                </p>
+                <p class="m-0">I humbly urge you all to work with us because We Are Here To Serve You so let us.
+
+                    Looking forward to reaching greater heights with you.
+                    God Bless
+                </p>
+            </div>
+        </div>
+    </div>
 </section>
 <!-- end of video -->
 

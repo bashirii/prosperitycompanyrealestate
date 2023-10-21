@@ -10,7 +10,17 @@
     width: 100px; /* Set the desired width */
     height: auto; /* Automatically adjust height to maintain aspect ratio */
   }
-    
+
   .color-b {
   color: #2eca6a;
+}
+.custom-frame {
+    border: 5px solid #ccc; /* Border width and color */
+    border-radius: 15px; /* Rounded corners for the frame */
+    padding: 10px; /* Space between the frame and the image */
+}
+
+.general {
+    max-width: 100%; /* Ensure the image fits within its container */
+    height: auto; /* Maintain the aspect ratio */
 }
