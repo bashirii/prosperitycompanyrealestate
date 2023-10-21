@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Carousel;
 use App\Models\Property;
 use App\Models\Team;
@@ -76,19 +77,19 @@ public function blog_grid()
     $templatePath = $this->getTemplatePath($templateName);
 
     $data = [
-
+        'blogs' => Blog::latest()->limit(3)->get()
     ];
 
     return view($templatePath, $data);
 }
 
-public function blog_single()
+public function blog_single($blog_id)
 {
     $templateName = 'RealEstate.blog_single';
     $templatePath = $this->getTemplatePath($templateName);
 
     $data = [
-
+        'blog' => Blog::findOrFail($blog_id)
     ];
 
     return view($templatePath, $data);

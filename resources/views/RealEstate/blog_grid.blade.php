@@ -20,7 +20,7 @@
             <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a href="index.html">Home</a>
+                  <a href="{{route('index')}}">Home</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
                   News Grid
@@ -37,7 +37,7 @@
       <div class="container">
         <div class="row">
 
-          {{-- @foreach($blogs as $blog)
+          @foreach($blogs as $blog)
           <div class="col-md-4">
             <div class="card-box-b card-shadow news-box">
               <div class="img-box-b">
@@ -50,19 +50,19 @@
                   </div>
                   <div class="card-title-b">
                     <h2 class="title-2">
-                      <a href="{{ route('blog_single', ['blog_id' => $blog->id]) }}">{{ Str::limit($blog->preview_desc, 15) }}</a>
+                      <a href="{{ route('blog_single', ['blog_id' => $blog->id]) }}">{{ Str::limit($blog->preview_desc, 20) }}</a>
                     </h2>
                   </div>
                   <div class="card-date">
-                    <span class="date-b">{{ $blog->created_at->format('d','M') }}</span>
+                    <span class="date-b">{{ $blog->created_at->format('d, M Y') }}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          @endforeach --}}
+          @endforeach
 
-          <div class="col-md-4">
+          {{-- <div class="col-md-4">
             <div class="card-box-b card-shadow news-box">
               <div class="img-box-b">
                 <img src="assets/img/post-2.jpg" alt="" class="img-b img-fluid">
@@ -176,7 +176,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
         </div>
         <div class="row">
           <div class="col-sm-12">

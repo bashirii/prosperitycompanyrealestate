@@ -18,7 +18,9 @@ class BlogLive extends Component
     public $viewForm = false;
 
     public $keywords;
-    public $blog, $preview_desc;
+    
+    public $blog, $title, $preview_desc;
+
     public $user;
 
     public $file;
@@ -27,6 +29,7 @@ class BlogLive extends Component
 
     public $rules = [
         // 'blog.date' => 'required|date|date_format:Y-m-d|after_or_equal:today',
+        'title' => ['required', 'string'],
         'preview_desc' => ['required', 'string'],
         'file' => ['nullable','required_if:isEditMode,false', 'image']
     ];
@@ -46,18 +49,21 @@ class BlogLive extends Component
                 $file_path = ((new FileUploadService())->upload("blog", $this->file));
                 $this->blog->img = $file_path;
             }
+
+            $this->blog->title = $this->title;
             $this->blog->preview_desc = $this->preview_desc;
 
             $this->blog->save();
 
             $this->dispatch('success_alert', 'Blog updated.');
 
-        }else{
+        } else{
             $file_path = ((new FileUploadService())->upload("blog", $this->file));
 
             $this->blog->created_by = Auth::user()->id;
             $this->blog->img = $file_path;
 
+            $this->blog->title = $this->title;
             $this->blog->preview_desc = $this->preview_desc;
 
             $this->blog->save();
@@ -87,7 +93,7 @@ class BlogLive extends Component
     public function render()
     {
         $blogs = Blog::when(!empty($this->keywords), function ($query){
-            $query->where('date', 'like', '%'. $this->keywords . '%')
+            $query->where('title', 'like', '%'. $this->keywords . '%')
                 ->orWhere('preview_desc', 'like', '%'. $this->keywords . '%');
         })->latest()->paginate('15');
         return view('livewire.blog-live', ['blogs' => $blogs]);
@@ -139,15 +145,15 @@ class BlogLive extends Component
     }
 
 
-    public function prepareEditblog($id)
+    public function prepareEditBlog($id)
     {
         $this->viewForm = true;
         $this->isEditMode = true;
         $this->blog = Blog::find($id);
 
         $this->file = $this->blog->file;
+        $this->blog->title = $this->title;
         $this->preview_desc + $this->blog->preview_desc;
-
 
     }
 

@@ -37,7 +37,7 @@ Route::get('/agents_grid', [RealEstateController::class, 'agents_grid'])
 Route::get('/blog_grid', [RealEstateController::class, 'blog_grid'])
     ->name('blog_grid');
 
-Route::get('/blog_single', [RealEstateController::class, 'blog_single'])
+Route::get('/blog/{blog_id}', [RealEstateController::class, 'blog_single'])
     ->name('blog_single');
 
 Route::get('/contact', [RealEstateController::class, 'contact'])

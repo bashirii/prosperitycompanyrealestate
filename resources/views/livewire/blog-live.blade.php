@@ -10,14 +10,22 @@
                             <button class="btn btn-warning btn-sm  float-end" wire:click="closeForm"><i class="uil-cancel"></i> Cancel</button>
                         </div>
                         <div class="card-body">
-                            <div class="mb-2">
-                                <label for="image" class="form-label font-12">Image <span class="required">*</span></label>
-                                <input type="file" wire:model="file" id="image" accept="image/*" class="form-control form-control-sm">
-                                @error('file') <span class="error">{{ $message }}</span> @enderror
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <label for="image" class="form-label font-12">Image <span class="required">*</span></label>
+                                    <input type="file" wire:model="file" id="image" accept="image/*" class="form-control form-control-sm">
+                                    @error('file') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="title" class="form-label font-12">Title <span class="required">*</span></label>
+                                    <input type="text" wire:model="title" id="title" class="form-control form-control-sm">
+                                    @error('title') <span class="error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
+                            
                             <div class="mb-2">
                                 <label for="preview_desc" class="form-label">Description <span class="required">*</span></label>
-                                <textarea wire:model="preview_desc" id="preview_desc" class="form-control form-control-sm"cols="30" rows="5"></textarea>
+                                <textarea wire:model="preview_desc" id="preview_desc" class="form-control form-control-sm"cols="30" rows="10"></textarea>
                                 @error('preview_desc') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <button type="button" class="btn btn-success" wire:click="save" wire:loading.attr="disabled">
@@ -47,8 +55,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Image</th>
-                                    <th>Date</th>
+                                    <th>Title</th>
                                     <th>Description</th>
+                                    <th>Date</th>
                                     {{-- <th>Status</th> --}}
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -66,9 +75,11 @@
 
                                         </td>
 
-                                        <td>{{ $blog->created_at->format('Y-m-d') }}</td>
+                                        <td>{{ Str::limit($blog->title, 20) }}</td>
 
-                                        <td>{{ Str::limit($blog->preview_desc, 20) }}</td>
+                                        <td>{{ Str::limit($blog->preview_desc, 30) }}</td>
+
+                                        <td>{{ $blog->created_at->format('Y-m-d') }}</td>
 
                                         {{-- <td>
                                             <button class="btn btn-primary btn-sm" wire:click="Active_Inactive('{{ $blog->id }}')"><i class="uil-eye"></i> >
@@ -82,7 +93,7 @@
                                         <td class="text-center">
                                             <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$blog->id }}')"><i class="uil-eye"></i></button>
                                             <button class="btn btn-warning btn-sm" wire:click="prepareEditblog('{{$blog->id }}')"><i class="uil-edit"></i></button>
-                                            <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$blog->id }}')"><i class="uil-trash"></i></button>
+                                            {{-- <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$blog->id }}')"><i class="uil-trash"></i></button> --}}
                                         </td>
                                     </tr>
                                 @empty
@@ -129,9 +140,9 @@
                             <p>{{ $blog->preview_desc }}</p>
                         </div>
                         <hr>
-                        {{-- <div class="row">
-                            <p class="col ">Recorded by:<span class="fw-bold"> {{ $blog->user->name }}</span></p>
-                        </div> --}}
+                        <div class="row">
+                            <p class="col ">Recorded by:<span class="fw-bold"> {{ optional($blog->user)->name }}</span></p>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>

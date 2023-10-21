@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('created_by');
             $table->string('img')->nullable();
+            $table->string('title');
             $table->string('preview_desc');
             $table->boolean('is_active')->default(false);
             $table->timestamps();

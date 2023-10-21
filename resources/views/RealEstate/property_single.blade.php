@@ -12,21 +12,21 @@
         <div class="row">
           <div class="col-md-12 col-lg-8">
             <div class="title-single-box">
-              <h1 class="title-single">304 Blaster Up</h1>
-              <span class="color-text-a">Chicago, IL 606543</span>
+              <h1 class="title-single">{{ $property->name }}</h1>
+              <span class="color-text-a">>{{ $property->location . ' ' . $property->address }}</span>
             </div>
           </div>
           <div class="col-md-12 col-lg-4">
             <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a href="index.html">Home</a>
+                  <a href="{{route('index')}}">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a href="property-grid.html">Properties</a>
+                  <a href="{{route('property_grid')}}">Properties</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  304 Blaster Up
+                  {{ $property->name }}
                 </li>
               </ol>
             </nav>
@@ -43,7 +43,7 @@
             <div id="property-single-carousel" class="swiper">
               <div class="swiper-wrapper">
                 <div class="carousel-item-b swiper-slide">
-                  <img src="assets/img/slide-1.jpg" alt="">
+                  <img src="{{ asset('storage/'.$property->img) }}" alt="" width="400px" height="">
                 </div>
                 <div class="carousel-item-b swiper-slide">
                   <img src="assets/img/slide-2.jpg" alt="">
@@ -162,10 +162,10 @@
               <li class="nav-item">
                 <a class="nav-link active" id="pills-video-tab" data-bs-toggle="pill" href="#pills-video" role="tab" aria-controls="pills-video" aria-selected="true">Video</a>
               </li>
-              {{-- <li class="nav-item">
-                <a class="nav-link" id="pills-plans-tab" data-bs-toggle="pill" href="#pills-plans" role="tab" aria-controls="pills-plans" aria-selected="false">Floor Plans</a>
-              </li>
               <li class="nav-item">
+                <a class="nav-link" id="pills-plans-tab" data-bs-toggle="pill" href="#pills-plans" role="tab" aria-controls="pills-plans" aria-selected="false">Picture</a>
+              </li>
+              {{-- <li class="nav-item">
                 <a class="nav-link" id="pills-map-tab" data-bs-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="false">Ubication</a>
               </li> --}}
             </ul>
@@ -174,10 +174,10 @@
                 <video src="{{ $property->youtube_link }}" width="560" height="315"></video>
                 {{-- <iframe  src="https://www.youtube.com/embed/2bvWZDSddKA?si=PeCSNkf4IJw1JSKE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> --}}
               </div>
-              {{-- <div class="tab-pane fade" id="pills-plans" role="tabpanel" aria-labelledby="pills-plans-tab">
-                <img src="assets/img/plan2.jpg" alt="" class="img-fluid">
+              <div class="tab-pane fade" id="pills-plans" role="tabpanel" aria-labelledby="pills-plans-tab">
+                <img src="{{ asset('storage/'.$property->agent->img) }}" alt="" class="img-fluid">
               </div>
-              <div class="tab-pane fade" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
+              {{-- <div class="tab-pane fade" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1422937950147!2d-73.98731968482413!3d40.75889497932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes+Square!5e0!3m2!1ses-419!2sve!4v1510329142834" width="100%" height="460" frameborder="0" style="border:0" allowfullscreen></iframe>
               </div> --}}
             </div>
