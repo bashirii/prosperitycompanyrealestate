@@ -68,7 +68,7 @@
                                     @endphp
                                 @forelse($blogs as $key => $blog)
                                     <tr>
-                                        <td>{{ $i + 1 }}</td> {{-- changed from this<td>{{ $key+1 }}</td> --}}
+                                        <td>{{ $i++ }}</td> {{-- changed from this<td>{{ $key+1 }}</td> --}}
                                         <td class="">
 
                                         <img src="{{ asset('storage/' . $blog->img) }}" alt="blog image" class="img" width="30px;" height="30px" srcset="">
@@ -79,7 +79,7 @@
 
                                         <td>{{ Str::limit($blog->preview_desc, 30) }}</td>
 
-                                        <td>{{ $blog->created_at->format('Y-m-d') }}</td>
+                                        <td>{{ $blog->created_at->format('d-m-Y') }}</td>
 
                                         {{-- <td>
                                             <button class="btn btn-primary btn-sm" wire:click="Active_Inactive('{{ $blog->id }}')"><i class="uil-eye"></i> >
@@ -91,9 +91,9 @@
                                             </button>
                                         </td> --}}
                                         <td class="text-center">
-                                            <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$blog->id }}')"><i class="uil-eye"></i></button>
+                                            <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$blog->id }}')" data-bs-toggle="modal" data-bs-target="#view_blog_modal"><i class="uil-eye"></i></button>
                                             <button class="btn btn-warning btn-sm" wire:click="prepareEditblog('{{$blog->id }}')"><i class="uil-edit"></i></button>
-                                            {{-- <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$blog->id }}')"><i class="uil-trash"></i></button> --}}
+                                            <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$blog->id }}')" data-bs-toggle="modal" data-bs-target="#delete_blog_modal"><i class="uil-trash"></i></button>
                                         </td>
                                     </tr>
                                 @empty
@@ -111,11 +111,11 @@
             </div>
         </div>
 
-        <div id="view_blog_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+        <div id="view_blog_modal" wire:ignore.self class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header modal-colored-header bg-info">
-                        <h4 class="modal-title" id="danger-header-modalLabel">blogs </h4>
+                        <h4 class="modal-title" id="danger-header-modalLabel">Blog </h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                     </div>
                     <div class="modal-body">
@@ -127,13 +127,9 @@
                                     </div>
                                 </div>
                             </div>
-                        <div class="col-5">
-                            <div class="row">
-                                <div class="col">
-                                    <img src="{{ asset('storage/' . $blog->img ) }}" alt="blog image" srcset="" width="180px">
-                                </div>
-                            </div>
                         </div>
+                        <div class="row">
+                            <img src="{{ asset('storage/' . $blog->img ) }}" alt="blog image" srcset="" height="250px" style="object-fit: cover;">
                         </div>
                         <hr>
                         <div class="row">
@@ -151,7 +147,7 @@
             </div><!-- /.modal-dialog -->
         </div>
 
-        <div id="delete_blog_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+        <div id="delete_blog_modal" wire:ignore.self class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header modal-colored-header bg-info">
@@ -163,7 +159,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" wire:click="deleteblog">Yes, Delete</button>
+                        <button type="button" class="btn btn-danger" wire:click="deleteBlog" data-bs-dismiss="modal">Yes, Delete</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

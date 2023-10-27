@@ -18,7 +18,9 @@ class CarouselLive extends Component
     public $viewForm = false;
 
     public $keywords;
+
     public $carousel;
+
     public $user;
 
 
@@ -118,21 +120,21 @@ class CarouselLive extends Component
         $created_by = $this->carousel->created_by;
         $this->user = User::find($created_by);
         $this->carousel->created_by = $this->user->name;
-        $this->emit('showViewModal');
+        // $this->emit('showViewModal');
     }
 
-    public function deletecarousel()
+    public function deleteCarousel()
     {
         $this->carousel->delete();
-        $this->emit('closeDeleteModal');
-        $this->dispatchBrowserEvent('success_alert', 'Successful.');
+        // $this->emit('closeDeleteModal');
+        $this->dispatch('success_alert', 'Successful.');
         $this->carousel = new carousel();
     }
 
     public function showDeleteModal(carousel $item)
     {
         $this->carousel = $item;
-        $this->emit('showDeleteModal');
+        // $this->emit('showDeleteModal');
     }
 
     public function prepareEditCarousel($id)

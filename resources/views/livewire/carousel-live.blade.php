@@ -89,7 +89,7 @@
                                 @endphp
                             @forelse($carousels as $key => $item)
                                 <tr>
-                                    <td>{{ $i+1 }}</td>
+                                    <td>{{ $i++ }}</td>
                                     <td class="">
                                         <img src="{{ asset('storage/' . $item->image) }}" alt="destination image" class="img" width="30px;" height="30px" srcset="">
                                     </td>
@@ -113,12 +113,12 @@
                                         @endif
                                     </td> --}}
                                     <td>
-                                        {{ $item->created_at }}
+                                        {{ $item->created_at->format('d-m-Y') }}
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$item->id }}')"><i class="uil-eye"></i></button>
-                                        <button class="btn btn-warning btn-sm" wire:click="prepareEditcarousel('{{$item->id }}')"><i class="uil-edit"></i></button>
-                                        {{-- <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$item->id }}')"><i class="uil-trash"></i></button> --}}
+                                        <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$item->id }}')" data-bs-toggle="modal" data-bs-target="#view_carousel_modal"><i class="uil-eye"></i></button>
+                                        <button class="btn btn-warning btn-sm" wire:click="prepareEditCarousel('{{$item->id }}')"><i class="uil-edit"></i></button>
+                                        <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$item->id }}')" data-bs-toggle="modal" data-bs-target="#delete_carousel_modal"><i class="uil-trash"></i></button>
                                     </td>
                                 </tr>
                             @empty
@@ -136,7 +136,7 @@
         </div>
     </div>
 
-    <div id="view_carousel_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+    <div id="view_carousel_modal" wire:ignore.self class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header modal-colored-header bg-info">
@@ -151,21 +151,25 @@
                                     <p class="font-14">{{ $carousel->created_at }}</p>
                                 </div>
                                 <div class="col-12">
-                                    <h2 class="font-16">{{ $carousel->address }}</h2>
+                                    <h1 class="font-16">{{ $carousel->name }}</h1>
+                                </div>
+                                <div class="col-12" style="margin-left: 10px;">
+                                    <b class="font-16">{{ $carousel->p_o_box . ' ' . $carousel->address }}</b>
+                                    <span class="font-16">{{ $carousel->location }}</span>
                                 </div>
                             </div>
                         </div>
                     <div class="col-5">
                         <div class="row">
                             <div class="col">
-                                <img src="{{ asset('storage/' . $carousel->image ) }}" alt="Carousel image" srcset="" width="180px">
+                                <img src="{{ asset('storage/' . $carousel->image ) }}" alt="Carousel image" srcset="" width="180px" height="180px" style="object-fit: cover;">
                             </div>
                         </div>
                     </div>
                     </div>
                     <hr>
                     <div class="row">
-                        <p>{{ $carousel->location }}</p>
+                        <p style="margin-left: 10px;"><b>Price: </b> ${{ $carousel->price }}</p>
                     </div>
                     <hr>
                     <div class="row">
@@ -179,7 +183,7 @@
         </div><!-- /.modal-dialog -->
     </div>
 
-    <div id="delete_carousel_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+    <div id="delete_carousel_modal" wire:ignore.self class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header modal-colored-header bg-info">
@@ -187,11 +191,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body">
-                    <h4 style="color: red">Are you sure you want to delete this Carsousel item?</h4>
+                    <h4 style="color: red">Are you sure you want to delete this Carsousel?</h4>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" wire:click="deletecarousel">Yes, Delete</button>
+                    <button type="button" class="btn btn-danger" wire:click="deleteCarousel" data-bs-dismiss="modal">Yes, Delete</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -204,7 +208,7 @@
         livewire.on('showViewModal', () => {
             $('#view_carousel_modal').modal('show')
         });
-        livewire.on('closeDeleteModal', () => {
+        livewire.on('closeViewModal', () => {
             $('#view_carousel_modal').modal('hide')
         });
     });

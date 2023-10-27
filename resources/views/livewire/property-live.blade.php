@@ -113,17 +113,17 @@
                                 <thead class="table-dark">
                                 <tr>
                                     <th>#</th>
+                                    <th>Image</th>
                                     <th>property_id</th>
                                     <th>Description</th>
-                                    <th>Image</th>
-                                    <th>Youtube video</th>
+                                    {{-- <th>Youtube video</th> --}}
                                     <th>Address</th>
                                     <th>Location</th>
                                     <th>Price</th>
                                     <th>Area (m<sup>2</sup>)</th>
-                                    <th>Beds</th>
-                                    <th>Baths</th>
-                                    <th>Garages</th>
+                                    {{-- <th>Beds</th> --}}
+                                    {{-- <th>Baths</th> --}}
+                                    {{-- <th>Garages</th> --}}
 
                                     {{-- <th>Status</th> --}}
                                     <th>Created At</th>
@@ -136,12 +136,12 @@
                                     @endphp
                                 @forelse($properties as $key => $property)
                                     <tr>
-                                        <td>{{ $i + 1 }}</td> {{-- changed from this<td>{{ $key+1 }}</td> --}}
+                                        <td>{{ $i++ }}</td> {{-- changed from this<td>{{ $key+1 }}</td> --}}
                                         <td class="">
                                             <img src="{{ asset('storage/' . $property->img) }}" alt="property image" class="img" width="30px;" height="30px" srcset="">
                                         </td>
                                         <td>{{ $property->property_id }}</td>
-                                        <td>{{ $property->youtube_link }}</td>
+                                        {{-- <td>{{ $property->youtube_link }}</td> --}}
                                         <td>{{ Str::limit($property->description, 10) }}</td>
                                         <td>
                                             {{ $property->address }}
@@ -155,7 +155,7 @@
                                         <td>
                                             {{ $property->price }}
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             {{ $property->beds }}
                                         </td>
                                         <td>
@@ -163,7 +163,7 @@
                                         </td>
                                         <td>
                                             {{ $property->garages }}
-                                        </td>
+                                        </td> --}}
 
                                         {{-- <td>
                                             @if($property->is_active)
@@ -173,13 +173,13 @@
                                             @endif
                                         </td> --}}
                                         <td>
-                                            {{ $property->created_at }}
+                                            {{ $property->created_at->format('d-m-Y') }}
                                         </td>
 
                                         <td class="text-center">
-                                            <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$property->id }}')"><i class="uil-eye"></i></button>
+                                            <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$property->id }}')" data-bs-toggle="modal" data-bs-target="#view_property_modal"><i class="uil-eye"></i></button>
                                             <button class="btn btn-warning btn-sm" wire:click="prepareEditProperty('{{$property->id }}')"><i class="uil-edit"></i></button>
-                                            {{-- <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$property->id }}')"><i class="uil-trash"></i></button> --}}
+                                            <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$property->id }}')" data-bs-toggle="modal" data-bs-target="#delete_property_modal"><i class="uil-trash"></i></button>
                                         </td>
                                     </tr>
                                 @empty
@@ -197,11 +197,11 @@
             </div>
         </div>
 
-        <div id="view_property_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+        <div id="view_property_modal" wire:ignore.self class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header modal-colored-header bg-info">
-                        <h4 class="modal-title" id="danger-header-modalLabel">properties </h4>
+                        <h4 class="modal-title" id="danger-header-modalLabel">Property </h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                     </div>
                     <div class="modal-body">
@@ -211,40 +211,44 @@
                                     <div class="col-12">
                                         <p class="font-14">{{ $property->created_at }}</p>
                                     </div>
-                                    <div class="col-12">
-                                        <h2 class="font-16">{{ $property->property_id }}</h2>
+                                    <div class="col-12" style="margin-left: 10px;">
+                                        <b class="font-16">{{ $property->address }}</b><br />
+                                        <span class="font-16">{{ $property->location }}</span>
                                     </div>
                                 </div>
                             </div>
                         <div class="col-5">
                             <div class="row">
                                 <div class="col">
-                                    <img src="{{ asset('storage/' . $property->img ) }}" alt="property image" srcset="" width="180px">
+                                    <img src="{{ asset('storage/' . $property->img ) }}" alt="property image" srcset="" width="180px" height="180px" style="object-fit: cover;">
                                 </div>
                             </div>
                         </div>
                         </div>
                         <hr>
                         <div class="row">
-                            <p>{{ $property->address }}</p>
+                            <p>{{ $property->description }}</p>
                         </div>
                         <div class="row">
-                            <p>{{ $property->location }}</p>
+                            <div class="col">
+                                <b>Area</b>
+                                <p>{{ $property->area }}</p>
+                            </div>
+                            <div class="col">
+                                <b>Beds</b>
+                                <p>{{ $property->beds }}</p>
+                            </div>
+                            <div class="col">
+                                <b>Baths</b>
+                                <p>{{ $property->baths }}</p>
+                            </div>
+                            <div class="col">
+                                <b>Garages</b>
+                                <p>{{ $property->garages }}</p>
+                            </div>
                         </div>
                         <div class="row">
-                            <p>{{ $property->area }}</p>
-                        </div>
-                        <div class="row">
-                            <p>{{ $property->price }}</p>
-                        </div>
-                        <div class="row">
-                            <p>{{ $property->beds }}</p>
-                        </div>
-                        <div class="row">
-                            <p>{{ $property->baths }}</p>
-                        </div>
-                        <div class="row">
-                            <p>{{ $property->garages }}</p>
+                            <p style="margin-left: 10px;"><b>Price: </b> ${{ $property->price }}</p>
                         </div>
                         <hr>
                         <div class="row">
@@ -258,7 +262,7 @@
             </div><!-- /.modal-dialog -->
         </div>
 
-        <div id="delete_property_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+        <div id="delete_property_modal" wire:ignore.self class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header modal-colored-header bg-info">
@@ -270,7 +274,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" wire:click="deleteproperty">Yes, Delete</button>
+                        <button type="button" class="btn btn-danger" wire:click="deleteProperty" data-bs-dismiss="modal">Yes, Delete</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

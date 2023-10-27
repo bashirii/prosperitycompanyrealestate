@@ -1,5 +1,5 @@
 @extends('layout.admin')
 @section('title', 'Bookings')
 @section('content')
-    <livewire:booking-live/>
+    <livewire:booking-live />
 @endsection

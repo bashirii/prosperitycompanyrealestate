@@ -138,13 +138,13 @@ class PropertyLive extends Component
         $created_by = $this->property->created_by;
         $this->user = User::find($created_by);
         $this->property->created_by = $this->user->property_id;
-        $this->emit('showViewModal');
+        // $this->emit('showViewModal');
     }
 
-    public function deleteproperty()
+    public function deleteProperty()
     {
         $this->property->delete();
-        $this->emit('closeDeleteModal');
+        // $this->emit('closeDeleteModal');
         $this->dispatchBrowserEvent('success_alert', 'Successful.');
         $this->property = new Property();
     }
@@ -154,7 +154,7 @@ class PropertyLive extends Component
     public function showDeleteModal(Property $news)
     {
         $this->property = $news;
-        $this->emit('showDeleteModal');
+        // $this->emit('showDeleteModal');
     }
 
     // public function prepareViewNews($id)

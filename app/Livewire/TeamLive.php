@@ -126,13 +126,13 @@ class TeamLive extends Component
         $created_by = $this->agent->created_by;
         $this->user = User::find($created_by);
         $this->agent->created_by = $this->user->name;
-        $this->emit('showViewModal');
+        // $this->emit('showViewModal');
     }
 
     public function deleteAgent()
     {
         $this->agent->delete();
-        $this->emit('closeDeleteModal');
+        // $this->emit('closeDeleteModal');
         $this->dispatchBrowserEvent('success_alert', 'Successful.');
         $this->agent = new Team();
     }
@@ -142,7 +142,7 @@ class TeamLive extends Component
     public function showDeleteModal(Team $news)
     {
         $this->agent = $news;
-        $this->emit('showDeleteModal');
+        // $this->emit('showDeleteModal');
     }
 
 
