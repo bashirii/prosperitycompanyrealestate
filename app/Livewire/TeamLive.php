@@ -27,7 +27,7 @@ class TeamLive extends Component
 
     public $facebook_link, $name, $email, $phone, $description;
     public $twitter_link;
-    public $linkedin_link;
+    //public $linkedin_link;
     public $instagram_link;
 
 
@@ -40,9 +40,10 @@ class TeamLive extends Component
         'phone' => ['required', 'string'],
         'file' => ['nullable','required_if:isEditMode,false', 'image'],
         'description' => ['required', 'string'],
-        'facebook_link' => ['required', 'string'],
-        'twitter_link' => ['required', 'string'],
-        'instagram_link' => ['required', 'string'],
+        'facebook_link' => ['nullable', 'string'],
+        'twitter_link' => ['nullable', 'string'],
+        'instagram_link' => ['nullable', 'string'],
+        //'linkedin_link' => ['nullable', 'string'],
     ];
 
     public function mount()
@@ -69,6 +70,7 @@ class TeamLive extends Component
             $this->agent->facebook_link = $this->facebook_link;
             $this->agent->twitter_link = $this->twitter_link;
             $this->agent->instagram_link = $this->instagram_link;
+            //$this->agent->linkedin_link = $this->linkedin_link;
 
             $this->agent->save();
 
@@ -87,6 +89,7 @@ class TeamLive extends Component
             $this->agent->facebook_link = $this->facebook_link;
             $this->agent->twitter_link = $this->twitter_link;
             $this->agent->instagram_link = $this->instagram_link;
+            //$this->agent->linkedin_link = $this->linkedin_link;
 
             $this->agent->save();
 
@@ -133,7 +136,7 @@ class TeamLive extends Component
     {
         $this->agent->delete();
         // $this->emit('closeDeleteModal');
-        $this->dispatchBrowserEvent('success_alert', 'Successful.');
+        $this->dispatch('success_alert', 'Successful.');
         $this->agent = new Team();
     }
 
@@ -160,7 +163,7 @@ class TeamLive extends Component
         $this->facebook_link = $this->agent->facebook_link;
         $this->instagram_link = $this->agent->instagram_link;
         $this->twitter_link = $this->agent->twitter_link;
-        $this->linkedin_link = $this->agent->linkedin_link;
+        //$this->linkedin_link = $this->agent->linkedin_link;
 
     }
 

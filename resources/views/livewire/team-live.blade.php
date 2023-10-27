@@ -26,7 +26,7 @@
                             <div class="row">
                                 <div class="col-md-6 mb-2">
                                     <label for="phone" class="form-label font-12">Phone No:<span class="required">*</span></label>
-                                    <input type="text" wire:model="phone" id="phone" class="form-control form-control-sm">
+                                    <input type="tel" wire:model="phone" id="phone" class="form-control form-control-sm">
                                     @error('phone') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
@@ -56,6 +56,10 @@
                                         <span class="input-group-text">Instagram</span>
                                         <input type="text" class="form-control" wire:model="instagram_link">
                                     </div>
+                                  <!-- div class="input-group">
+                                        <span class="input-group-text">Linkedin</span>
+                                        <input type="text" class="form-control" wire:model="linkedin_link">
+                                    </div -->
                                 </div>
                             </div>
                             
@@ -212,7 +216,7 @@
                             <p><b>Facebook:</b> {{ $agent->facebook_link  }}</p>
                             <p><b>Twitter:</b> {{ $agent->twitter_link  }}</p>
                             <p><b>Instagram:</b> {{ $agent->instagram_link  }}</p>
-                            <p><b>Linkedin:</b> {{ $agent->linkedin_link  }}</p>
+                            <!-- p><b>Linkedin:</b> {{ $agent->linkedin_link  }}</p -->
                         </div>
                         <hr>
                         <div class="row">
