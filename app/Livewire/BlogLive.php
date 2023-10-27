@@ -105,13 +105,13 @@ class BlogLive extends Component
         $created_by = $this->blog->created_by;
         $this->user = User::find($created_by);
         $this->blog->created_by = $this->user->date;
-        $this->emit('showViewModal');
+        // $this->emit('showViewModal');
     }
 
-    public function deleteblog()
+    public function deleteBlog()
     {
         $this->blog->delete();
-        $this->emit('closeDeleteModal');
+        // $this->emit('closeDeleteModal');
         $this->dispatchBrowserEvent('success_alert', 'Successful.');
         $this->blog = new Blog();
     }
@@ -141,7 +141,7 @@ class BlogLive extends Component
     public function showDeleteModal(Blog $news)
     {
         $this->blog = $news;
-        $this->emit('showDeleteModal');
+        // $this->emit('showDeleteModal');
     }
 
 

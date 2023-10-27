@@ -103,10 +103,10 @@
                                     <th>Phone</th>
                                     <th>Email</th>
                                     <th>Descripiton</th>
-                                    <th>Facebook</th>
-                                    <th>Twitter</th>
-                                    <th>Linkedin</th>
-                                    <th>Instagram</th>
+                                    {{-- <th>Facebook</th> --}}
+                                    {{-- <th>Twitter</th> --}}
+                                    {{-- <th>Linkedin</th> --}}
+                                    {{-- <th>Instagram</th> --}}
                                     {{-- <th>Status</th> --}}
                                     <th>Created At</th>
                                     <th class="text-center">Action</th>
@@ -118,7 +118,7 @@
                                     @endphp
                                 @forelse($team as $key => $agent)
                                     <tr>
-                                        <td>{{ $i + 1 }}</td> {{-- changed from this<td>{{ $key+1 }}</td> --}}
+                                        <td>{{ $i++ }}</td> {{-- changed from this<td>{{ $key+1 }}</td> --}}
                                         <td class="">
 
                                                 <img src="{{ asset('storage/' . $agent->img) }}" alt="agent image" class="img" width="30px;" height="30px" srcset="">
@@ -134,10 +134,10 @@
                                         <td>{{ Str::limit($agent->description, 10) }}</td>
 
                                         <!-- Add columns for social links here -->
-                                        <td>{{ $agent->facebook_link  }}</td>
-                                        <td>{{ $agent->twitter_link  }}</td>
-                                        <td>{{ $agent->linkedin_link  }}</td>
-                                        <td>{{ $agent->instagram_link  }}</td>
+                                        {{-- <td>{{ $agent->facebook_link  }}</td> --}}
+                                        {{-- <td>{{ $agent->twitter_link  }}</td> --}}
+                                        {{-- <td>{{ $agent->linkedin_link  }}</td> --}}
+                                        {{-- <td>{{ $agent->instagram_link  }}</td> --}}
                                         {{-- <td>
                                             @if($agent->is_active)
                                                 <span class="badge badge-success-lighten">Active</span>
@@ -147,13 +147,13 @@
                                         </td> --}}
                                         <td>
 
-                                            {{ $agent->created_at }}
+                                            {{ $agent->created_at->format('d-m-Y') }}
 
                                         </td>
                                         <td class="text-center">
-                                            <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$agent->id }}')"><i class="uil-eye"></i></button>
+                                            <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$agent->id }}')" data-bs-toggle="modal" data-bs-target="#view_agent_modal"><i class="uil-eye"></i></button>
                                             <button class="btn btn-warning btn-sm" wire:click="prepareEditAgent('{{$agent->id }}')"><i class="uil-edit"></i></button>
-                                            {{-- <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$agent->id }}')"><i class="uil-trash"></i></button> --}}
+                                            <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$agent->id }}')" data-bs-toggle="modal" data-bs-target="#delete_agent_modal"><i class="uil-trash"></i></button>
                                         </td>
                                     </tr>
                                 @empty
@@ -171,11 +171,11 @@
             </div>
         </div>
 
-        <div id="view_agent_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+        <div id="view_agent_modal" wire:ignore.self class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header modal-colored-header bg-info">
-                        <h4 class="modal-title" id="danger-header-modalLabel">agents </h4>
+                        <h4 class="modal-title" id="danger-header-modalLabel">Agent </h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                     </div>
                     <div class="modal-body">
@@ -193,23 +193,26 @@
                         <div class="col-5">
                             <div class="row">
                                 <div class="col">
-                                    <img src="{{ asset('storage/' . $agent->img ) }}" alt="agent image" srcset="" width="180px">
+                                    <img src="{{ asset('storage/' . $agent->img ) }}" alt="agent image" width="180px" height="180px" style="object-fit: cover;">
                                 </div>
                             </div>
                         </div>
                         </div>
                         <hr>
                         <div class="row">
-                            <p>{{ $agent->phone }}</p>
-                        </div>
-                        <div class="row">
-                            <p>{{ $agent->email }}</p>
+                            <div class="col">
+                                <p>{{ $agent->phone }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ $agent->email }}</p>
+                            </div>
                         </div>
                         <hr>
                         <div class="row">
-                            <p>Facebook: {{ $agent->facebook_link  }}</p>
-                            <p>Twitter: {{ $agent->twitter_link  }}</p>
-                            <p>Instagram: {{ $agent->instagram_link  }}</p>
+                            <p><b>Facebook:</b> {{ $agent->facebook_link  }}</p>
+                            <p><b>Twitter:</b> {{ $agent->twitter_link  }}</p>
+                            <p><b>Instagram:</b> {{ $agent->instagram_link  }}</p>
+                            <p><b>Linkedin:</b> {{ $agent->linkedin_link  }}</p>
                         </div>
                         <hr>
                         <div class="row">
@@ -223,7 +226,7 @@
             </div><!-- /.modal-dialog -->
         </div>
 
-        <div id="delete_agent_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+        <div id="delete_agent_modal" wire:ignore.self class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header modal-colored-header bg-info">
@@ -235,7 +238,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" wire:click="deleteagent">Yes, Delete</button>
+                        <button type="button" class="btn btn-danger" wire:click="deleteAgent" data-bs-dismiss="modal">Yes, Delete</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

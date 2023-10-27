@@ -110,13 +110,13 @@ class TestimonialLive extends Component
         $created_by = $this->Testimonial->created_by;
         $this->user = User::find($created_by);
         $this->Testimonial->created_by = $this->user->name;
-        $this->emit('showViewModal');
+        // $this->emit('showViewModal');
     }
 
     public function deleteTestimonial()
     {
         $this->Testimonial->delete();
-        $this->emit('closeDeleteModal');
+        // $this->emit('closeDeleteModal');
         $this->dispatchBrowserEvent('success_alert', 'Successful.');
         $this->Testimonial = new Testimonial();
     }
@@ -126,7 +126,7 @@ class TestimonialLive extends Component
     public function showDeleteModal(Testimonial $news)
     {
         $this->Testimonial = $news;
-        $this->emit('showDeleteModal');
+        // $this->emit('showDeleteModal');
     }
 
     // public function prepareViewNews($id)

@@ -65,7 +65,7 @@
                                     @endphp
                                 @forelse($client as $key => $Testimonial)
                                     <tr>
-                                        <td>{{ $i + 1 }}</td> {{-- changed from this<td>{{ $key+1 }}</td> --}}
+                                        <td>{{ $i++ }}</td> {{-- changed from this<td>{{ $key+1 }}</td> --}}
                                         <td class="">
                                             <img src="{{ asset('storage/' . $Testimonial->img) }}" alt="Testimonial image" class="img" width="30px;" height="30px" srcset="">
                                         </td>
@@ -79,13 +79,13 @@
                                             @endif
                                         </td> --}}
                                         <td>
-                                            {{ $Testimonial->created_at }}
+                                            {{ $Testimonial->created_at->format('d-m-Y') }}
                                         </td>
 
                                         <td class="text-center">
-                                            <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$Testimonial->id }}')"><i class="uil-eye"></i></button>
+                                            <button class="btn btn-primary btn-sm" wire:click="showViewModal('{{$Testimonial->id }}')" data-bs-toggle="modal" data-bs-target="#view_Testimonial_modal"><i class="uil-eye"></i></button>
                                             <button class="btn btn-warning btn-sm" wire:click="prepareEditTestimonial('{{$Testimonial->id }}')"><i class="uil-edit"></i></button>
-                                            {{-- <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$Testimonial->id }}')"><i class="uil-trash"></i></button> --}}
+                                            <button class="btn btn-danger btn-sm" wire:click="showDeleteModal('{{$Testimonial->id }}')" data-bs-toggle="modal" data-bs-target="#delete_Testimonial_modal"><i class="uil-trash"></i></button>
                                         </td>
                                     </tr>
                                 @empty
@@ -103,11 +103,11 @@
             </div>
         </div>
 
-        <div id="view_Testimonial_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+        <div id="view_Testimonial_modal" wire:ignore.self class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header modal-colored-header bg-info">
-                        <h4 class="modal-title" id="danger-header-modalLabel">Testimonials </h4>
+                        <h4 class="modal-title" id="danger-header-modalLabel">Testimonial </h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                     </div>
                     <div class="modal-body">
@@ -125,13 +125,14 @@
                         <div class="col-5">
                             <div class="row">
                                 <div class="col">
-                                    <img src="{{ asset('storage/' . $Testimonial->img ) }}" alt="Testimonial image" srcset="" width="180px">
+                                    <img src="{{ asset('storage/' . $Testimonial->img ) }}" alt="Testimonial image" srcset="" width="180px" height="180px" style="object-fit: cover;">
                                 </div>
                             </div>
                         </div>
                         </div>
                         <hr>
                         <div class="row">
+                            <b>Testmonial:</b>
                             <p>{{ $Testimonial->preview_desc }}</p>
                         </div>
                         <hr>
@@ -146,7 +147,7 @@
             </div><!-- /.modal-dialog -->
         </div>
 
-        <div id="delete_Testimonial_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+        <div id="delete_Testimonial_modal" wire:ignore.self class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header modal-colored-header bg-info">
@@ -158,7 +159,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" wire:click="deleteTestimonial">Yes, Delete</button>
+                        <button type="button" class="btn btn-danger" wire:click="deleteTestimonial" data-bs-dismiss="modal">Yes, Delete</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
